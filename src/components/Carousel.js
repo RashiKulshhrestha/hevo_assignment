@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import "./Carousel.css"
 
 const arr = ["img1", "img2", "img3", "img4"]
 
@@ -13,15 +14,27 @@ export default function Carousel() {
     console.log("next", current)
   }
   return (
-    <div className="carousel-container">
-      <button onClick={handlePrev}>prev</button>
-      <div>
+    <div>
+      <div className="carousel-container">
+        <button onClick={handlePrev}>prev</button>
+        <div>
+          {arr.map((item, index) => (
+            <div>
+              {index === current ? <div key={index}>{item}</div> : null}
+            </div>
+          ))}
+        </div>
+        <button onClick={handleNext}>next</button>
+      </div>
+      <div className="dots-wrapper">
         {arr.map((item, index) => (
-          <div>{index === current ? <div key={index}>{item}</div> : null}</div>
+          <div
+            className={
+              index === current ? "current-carousel" : "non-current-carousel"
+            }
+          ></div>
         ))}
       </div>
-      <button onClick={handleNext}>next</button>
-      <div></div>
     </div>
   )
 }
