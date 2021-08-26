@@ -3,26 +3,25 @@ import CardView from "./CardView"
 import "./Carousel.css"
 import data from "./carouselData"
 
-// const arr = ["img1", "img2", "img3", "img4"]
-
 export default function Carousel() {
   const [current, setCurrent] = useState(0)
   const handlePrev = () => {
     clearInterval(timer)
     setCurrent(current === 0 ? data.length - 1 : current - 1)
-    console.log("prev", current)
   }
   const handleNext = () => {
     clearInterval(timer)
     setCurrent(current === data.length - 1 ? 0 : current + 1)
-    console.log("next", current)
   }
   let timer = ""
   useEffect(() => {
     timer = setTimeout(() => {
       setCurrent(current === data.length - 1 ? 0 : current + 1)
     }, 3000)
-  })
+    return () => {
+      clearInterval(timer)
+    }
+  }, [current])
   const handleDots = index => {
     clearInterval(timer)
     setCurrent(index)
@@ -31,13 +30,17 @@ export default function Carousel() {
     <div className="main-container">
       <div classname="carousel-container">
         <div className="carousel-wrapper">
-          <button onClick={handlePrev}>prev</button>
+          <div onClick={handlePrev}>
+            <i class="fa fa-arrow-circle-left arrows" aria-hidden="true"></i>
+          </div>
           <div>
             {data.map((item, index) => (
               <div>{index === current ? <CardView data={item} /> : null}</div>
             ))}
           </div>
-          <button onClick={handleNext}>next</button>
+          <div onClick={handleNext}>
+            <i class="fa fa-arrow-circle-right arrows"></i>
+          </div>
         </div>
         <div className="dots-wrapper">
           {data.map((item, index) => (

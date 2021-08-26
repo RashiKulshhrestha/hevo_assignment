@@ -35,8 +35,12 @@
   height: 15px;
   cursor: pointer;
   margin: 10px;
+  opacity: 0.5;
 }
 
+.non-current-carousel:hover {
+  opacity: 1;
+}
 .dots-wrapper {
   display: flex;
   flex-direction: row;
@@ -53,8 +57,17 @@
   border-radius: 20px;
   box-shadow: 5px 5px 10px grey;
   padding: 20px;
-  max-width: 400px;
-  max-height: 300px;
-  min-height: 300px;
-  min-width: 400px;
+  width: 400px;
+  height: 400px;
+}
+
+.arrows {
+  opacity: 0.5;
+  font-size: 70px;
+  color: grey;
+  cursor: pointer;
+}
+
+.arrows:hover {
+  opacity: 1;
 }
